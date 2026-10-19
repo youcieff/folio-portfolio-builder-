@@ -1,0 +1,213 @@
+/* ─── Folio Editor Design System ─────────────────────────────────────────────
+ *
+ * Concept: a designer's desk — paper, ink, and a red proofreader's pen.
+ * One accent (--accent). Everything else is ink on paper. No gradients.
+ * Spacing is deliberately uneven: more above headings than below.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Fonts ──────────────────────────────────────────────────────────────────*/
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap');
+
+/* ─── Reset ──────────────────────────────────────────────────────────────────*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Token definitions ──────────────────────────────────────────────────────*/
+:root {
+  /* Surface */
+  color-scheme: light;
+  --paper:    #f7f5f0;
+  --surface:  #fffefa;
+  --ink:      #17251f;
+  --ink-soft: #65716a;
+  --accent:   #bb603e;
+
+  /* Typography */
+  --font-ui:   var(--editor-font-ui,   'Inter Tight', system-ui, sans-serif);
+  --font-head: var(--editor-font-head, 'Fraunces',    Georgia, serif);
+  --font-mono: var(--editor-font-mono, 'JetBrains Mono', 'Courier New', monospace);
+
+  /* Scale — deliberately non-uniform */
+  --text-xs:  0.6875rem;  /* 11px */
+  --text-sm:  0.8125rem;  /* 13px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-lg:  1.125rem;   /* 18px */
+  --text-xl:  1.5rem;     /* 24px */
+
+  /* Spacing — asymmetric rhythm */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* Borders */
+  --border: 1px solid #e5e0d6;
+
+  /* Hard shadows (4px 4px 0) — no blur, ink color */
+  --shadow-card: 0 16px 42px rgba(23, 37, 31, .09);
+  --shadow-sm:   0 4px 12px rgba(23, 37, 31, .13);
+
+  /* Editor panel widths */
+  --sidebar-w:   220px;
+  --inspector-w: 280px;
+  --topbar-h:    52px;
+}
+
+/* ─── Dark mode — warm, not pure black ──────────────────────────────────────*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:    #1E1C18;
+    --surface:  #252318;
+    --ink:      #EDE8DC;
+    --ink-soft: #8A8374;
+    --accent:   #E8452C;
+  }
+}
+
+/* Keep the editor's studio palette consistent across operating systems. */
+:root {
+  color-scheme: light;
+  --paper: #f7f5f0;
+  --surface: #fffefa;
+  --ink: #17251f;
+  --ink-soft: #65716a;
+  --accent: #bb603e;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────*/
+html {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+body {
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: var(--paper);
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────────*/
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  line-height: 1.15;
+  /* More space above headings than below — intentional rhythm */
+  margin-block-start: var(--sp-8);
+  margin-block-end:   var(--sp-3);
+}
+
+h1 { font-size: var(--text-xl); }
+h2 { font-size: var(--text-lg); }
+h3 { font-size: var(--text-base); font-family: var(--font-ui); font-weight: 500; }
+
+p  { font-size: var(--text-base); line-height: 1.65; color: var(--ink-soft); }
+
+/* ─── Interactive baseline ───────────────────────────────────────────────────*/
+button {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  transition: color .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s cubic-bezier(.2,.75,.25,1);
+}
+
+input, textarea, select {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--ink);
+  background: #fffefa;
+  border: var(--border);
+  padding: var(--sp-2) var(--sp-3);
+  outline: none;
+  border-radius: 8px;
+  transition: border-color .16s ease, box-shadow .16s ease;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* ─── Utility classes ────────────────────────────────────────────────────────*/
+.mono        { font-family: var(--font-mono); font-size: var(--text-xs); }
+.ink-soft    { color: var(--ink-soft); }
+.accent      { color: var(--accent); }
+
+/* Panel card — ink border + hard offset shadow */
+.panel-card {
+  border: var(--border);
+  box-shadow: var(--shadow-card);
+  background: var(--surface);
+  border-radius: 14px;
+}
+
+/* Label above an input */
+.field-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-block-end: var(--sp-1);
+}
+
+/* ─── Paper grain overlay (on canvas only, applied via .canvas-grain) ────────*/
+.canvas-grain {
+  position: relative;
+}
+.canvas-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/grain.svg');
+  background-repeat: repeat;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ─── Scrollbars ─────────────────────────────────────────────────────────────*/
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--ink-soft); opacity: 0.4; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink); }
+
+/* ─── Focus ring (accessibility) ─────────────────────────────────────────────*/
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+html[lang="ar"] { font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", Tahoma, sans-serif; }
+html[lang="ar"] :is(h1, h2, h3, h4) { font-family: "Noto Naskh Arabic", "IBM Plex Sans Arabic", Tahoma, serif; letter-spacing: 0; line-height: 1.35; }
+
+::selection { background: #f2d9cb; color: #17251f; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+.landing-hero h1, .landing-hero h2, .landing-steps h2 { margin-block: 0; }
+.landing-hero p, .landing-steps p { margin-block: 0; }
+@media (max-width: 760px) {
+  .landing-hero { grid-template-columns: 1fr !important; gap: 48px !important; padding-top: 42px !important; }
+  .landing-steps { grid-template-columns: 1fr !important; gap: 28px !important; }
+}

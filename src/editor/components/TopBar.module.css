@@ -1,0 +1,263 @@
+.topbar {
+  height: 66px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0 clamp(14px, 2.4vw, 30px);
+  background: color-mix(in srgb, #fff 94%, #eeeaff);
+  border-block-end: 1px solid #e8e4f3;
+  box-shadow: 0 8px 30px rgba(49, 37, 96, .08);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.logo {
+  font-family: var(--font-head);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+  margin-inline-end: var(--sp-4);
+  letter-spacing: -0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.logo::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: linear-gradient(135deg, #8c74ff, #4dbbd2); box-shadow: 0 0 0 4px #8065ed20, 0 0 18px #8065ed70; }
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  border: 1px solid #e6e1f1;
+  border-radius: 13px;
+  background: color-mix(in srgb, #fff 86%, #f0edfb);
+  padding: 3px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 30px;
+  border-radius: 6px;
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, transform .18s ease;
+  font-family: var(--font-ui);
+}
+
+.btn:hover:not(:disabled) {
+  color: var(--ink);
+  background: rgba(0,0,0,0.05);
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.btnActive {
+  color: var(--accent);
+  background: #eeeaff;
+  box-shadow: inset 0 0 0 1px #ddd5ff;
+  border-radius: 8px;
+}
+
+.actions {
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.btnGhost {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid #e3dfed;
+  border-radius: 9px;
+  padding: var(--sp-1) var(--sp-4);
+  cursor: pointer;
+  height: 32px;
+  transition: color 0.1s, border-color 0.1s;
+}
+.btnGhost:hover {
+  color: #4f3bac;
+  border-color: #c7baf5;
+  background: #f8f6ff;
+  box-shadow: 0 4px 12px #4934aa12;
+}
+.fileInput { position: absolute; width: 1px; height: 1px; clip: rect(0, 0, 0, 0); overflow: hidden; }
+.backupStatus { position: absolute; inset-inline-end: 20px; top: calc(100% + 8px); z-index: 120; max-width: min(420px, calc(100vw - 32px)); padding: 10px 14px; border: 1px solid #dcd5f4; border-radius: 10px; background: #fff; color: #433678; box-shadow: 0 8px 28px #22164b20; font-size: 12px; animation: fadeIn .18s ease-out; }
+
+.btnAccent {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(125deg, #755ce8, #5844c8);
+  border: none;
+  padding: var(--sp-1) var(--sp-4);
+  cursor: pointer;
+  height: 32px;
+  border-radius: 9px;
+  box-shadow: 0 5px 13px #5b47ca3b;
+  transition: transform .18s cubic-bezier(.2,.75,.25,1), box-shadow .18s ease, filter .18s ease;
+}
+.btnAccent:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 7px 17px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.btnAccent:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── AI Button ──────────────────────────────────────── */
+.btnAI {
+  composes: btn;
+  width: auto;
+  height: 32px;
+  padding: 0 11px;
+  white-space: nowrap;
+  border-radius: 8px;
+  background: linear-gradient(120deg, #785fe8 0%, #686ee8 52%, #4aa9cb 100%);
+  color: white;
+  border: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btnAI:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ─── Modal (Custom Confirm) ────────────────────────── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.modalContent {
+  background: var(--surface);
+  color: var(--ink);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.2s ease-out;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btnDanger {
+  composes: btn;
+  background-color: #ef4444; /* red-500 */
+  color: white;
+  border-color: #ef4444;
+}
+.btnDanger:hover {
+  background-color: #dc2626; /* red-600 */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 700px) {
+  .topbar { height: auto; min-height: 58px; flex-wrap: wrap; gap: 7px; padding-block: 8px; }
+  .logo { margin-inline-end: 5px; }
+  .saveStatus { order: 5; width: 100%; padding-inline: 4px; }
+  .actions { gap: 6px; }
+  .btnAI { width: 34px; overflow: hidden; padding-inline: 9px; font-size: 0; }
+  .btnAI::first-letter { font-size: 15px; }
+  .btnGhost, .btnAccent { padding-inline: 9px; }
+}
+@media (max-width: 1280px) and (min-width: 701px) {
+  .topbar { height: auto; min-height: 62px; flex-wrap: wrap; gap: 8px; padding-block: 8px; }
+  .actions { order: 2; flex: 1 0 100%; justify-content: flex-end; margin-inline-start: 0; gap: 8px; }
+}
+@media (max-width: 480px) {
+  .topbar { justify-content: space-between; }
+  .logo { font-size: 16px; margin-inline-end: 0; }
+  .saveStatus { order: initial; width: auto; font-size: 10px; }
+  .saveStatus:not(.saveError) { font-size: 0; gap: 0; }
+  .saveStatus:not(.saveError) i { width: 8px; height: 8px; }
+  .actions { margin-inline-start: 0; }
+  .btnAI { display: none; }
+  .group .btn { width: 29px; }
+  .actions { flex-wrap: wrap; }
+  .btnGhost, .btnAccent { font-size: 11px; padding-inline: 7px; }
+}
+
+/* Keep editor chrome in the same visual family as the homepage. */
+.topbar { background: #fffefa; border-block-end-color: #e5e0d6; box-shadow: 0 8px 30px rgba(23, 37, 31, .06); }
+.logo::before { background: linear-gradient(135deg, #bb603e, #a5c38b); box-shadow: 0 0 0 4px #bb603e18, 0 0 16px #bb603e35; }
+.saveStatus { display: inline-flex; align-items: center; gap: 7px; color: #728075; font-size: 11px; white-space: nowrap; }
+.saveStatus i { width: 7px; height: 7px; border-radius: 50%; background: #76a779; }
+.saveError { color: #a23d2c; }
+.saveError i { background: #c84d36; }
+.group { border-color: #e5e0d6; background: #f7f5f0; }
+.btnActive { color: #8c432a; background: #f8eee7; box-shadow: inset 0 0 0 1px #e9cbb9; }
+.btnGhost { border-color: #e5e0d6; }
+.btnGhost:hover { color: #8c432a; border-color: #d7a58e; background: #fbf1e9; box-shadow: 0 4px 12px #bb603e12; }
+.backupStatus { border-color: #e5e0d6; color: #35463d; }
+.btnAccent { background: #bb603e; box-shadow: 0 5px 13px #bb603e35; }
+.btnAccent:hover { background: #a94f31; }
+.btnAI { background: #17251f; color: #fffefa; }
+.btnAI:hover { background: #263d32; }
+.languageBtn { min-height: 31px; padding: 0 10px; border: 1px solid #dfd9cf; border-radius: 999px; color: #59675e; background: #fffefa; font-size: 10px; font-weight: 700; }
+.languageBtn:hover { border-color: #bb603e; color: #8c432a; background: #fbf1e9; }
+@media (max-width: 480px) { .languageBtn { padding-inline: 8px; } }
+
+/* Calm, clear reset confirmation with stable button sizing. */
+.modalOverlay { padding: 24px; background: rgba(18, 27, 22, .56); backdrop-filter: blur(10px) saturate(.82); -webkit-backdrop-filter: blur(10px) saturate(.82); }
+.modalContent { position: relative; width: min(100%, 460px); max-width: 460px; overflow: hidden; padding: 28px; border: 1px solid #e7e1d7; border-radius: 20px; background: #fffefa; box-shadow: 0 28px 90px #101a1645, 0 4px 14px #101a161a; animation: slideUp .28s cubic-bezier(.16,1,.3,1); }
+.modalContent::before { position: absolute; content: ""; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, #bb603e, #d6aa82 50%, #b7c98d); }
+.modalHeading { display: grid; grid-template-columns: 44px minmax(0,1fr); align-items: start; gap: 15px; margin-bottom: 26px; }
+.modalIcon { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid #efd8ca; border-radius: 14px; color: #a94f31; background: #fbf0e9; font-size: 20px; font-weight: 750; }
+.modalHeading h3 { margin: 1px 0 7px; color: #17251f; font-size: 18px; font-weight: 700; letter-spacing: -.025em; }
+.modalHeading p { max-width: 340px; margin: 0; color: #68756b; font-size: 13px; line-height: 1.65; }
+.modalActions { display: flex; justify-content: flex-end; gap: 10px; padding-top: 18px; border-top: 1px solid #eee9e0; }
+.modalActions button { display: inline-flex; min-width: 126px; min-height: 44px; flex: 1 1 0; align-items: center; justify-content: center; padding: 0 15px; border-radius: 10px; font-size: 12px; font-weight: 650; white-space: nowrap; }
+.modalCancel { border: 1px solid #e2ddd3; color: #526056; background: #fffefa; transition: border-color .18s, background .18s, color .18s; }
+.modalCancel:hover { border-color: #c9c2b6; color: #17251f; background: #f7f5f0; }
+.btnDanger { width: auto; height: 44px; border: 1px solid #ad4f35; border-radius: 10px; color: #fffaf4; background: linear-gradient(115deg, #bd6545, #a84c32); box-shadow: 0 5px 13px #a84c3229; transition: transform .18s, box-shadow .18s, filter .18s; }
+.btnDanger:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 8px 18px #a84c3233; }
+.btnDanger:active { transform: translateY(0); }
+@media (max-width: 480px) {
+  .modalOverlay { padding: 16px; }
+  .modalContent { padding: 24px 20px 20px; border-radius: 17px; }
+  .modalHeading { grid-template-columns: 38px minmax(0,1fr); gap: 12px; margin-bottom: 22px; }
+  .modalIcon { width: 38px; height: 38px; border-radius: 12px; }
+  .modalHeading h3 { font-size: 17px; }
+  .modalHeading p { font-size: 12px; }
+  .modalActions { gap: 8px; padding-top: 15px; }
+  .modalActions button { min-width: 0; min-height: 43px; padding-inline: 8px; font-size: 11px; }
+}

@@ -1,0 +1,36 @@
+.panel { width: 100%; max-width: 540px; margin: 0 auto; padding: 26px 22px 30px; display: grid; gap: 16px; }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+.eyebrow { margin: 0 0 6px; color: #725bd1; font: 700 9px/1.4 var(--font-mono); letter-spacing: .1em; }
+.header h2 { margin: 0; color: #211d32; font: 650 20px/1.2 var(--font-ui); letter-spacing: -.04em; }
+.summary { max-width: 300px; margin: 8px 0 0; color: #777187; font-size: 11px; line-height: 1.6; }
+.score { --score: 0%; width: 62px; height: 62px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: radial-gradient(circle at center, #fff 61%, transparent 63%), conic-gradient(#7057e8 var(--score), #ece9f5 0); color: #5140ad; }
+.score strong { font: 750 19px/1 var(--font-ui); letter-spacing: -.06em; }
+.score > span { margin-top: 4px; font-size: 9px; font-weight: 700; }
+.progress { height: 6px; overflow: hidden; border-radius: 99px; background: #ece9f5; }
+.progress > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #755ce9, #53b3cf); transition: width .35s ease; }
+.scoreNote { margin: -9px 0 0; color: #898398; font-size: 10px; }
+.checks { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.checks li { display: grid; grid-template-columns: 26px minmax(0,1fr) auto; align-items: center; gap: 9px; padding: 11px 10px; border: 1px solid #ebe8f2; border-radius: 12px; background: linear-gradient(135deg, #fff, #fcfbfe); transition: border-color .2s, transform .2s, box-shadow .2s; }
+.checks li:hover { transform: translateY(-1px); border-color: #dad3f0; box-shadow: 0 7px 18px #4637810a; }
+.checkIcon { width: 23px; height: 23px; display: grid; place-items: center; border: 1px solid #ded9eb; border-radius: 50%; color: #8e87a1; font-size: 12px; }
+.done .checkIcon { border-color: #b8e4d3; color: #258365; background: #eaf8f2; }
+.checkCopy { display: grid; gap: 3px; min-width: 0; }
+.checkCopy strong { color: #3a3450; font-size: 11px; font-weight: 650; }
+.checkCopy span { color: #898398; font-size: 9px; line-height: 1.45; }
+.checks button { padding: 6px 8px; border: 1px solid #e7e3f0; border-radius: 8px; background: white; color: #6755c0; font-size: 9px; font-weight: 650; }
+.checks button:hover { border-color: #b9adeb; background: #f5f2ff; }
+.privacy { margin: 0; padding: 11px 12px; border-radius: 9px; color: #79738c; background: #f3f1f9; font-size: 10px; line-height: 1.55; }
+@media (max-width: 520px) { .panel { padding: 20px 14px; } .header h2 { font-size: 18px; } .checks li { grid-template-columns: 24px minmax(0,1fr) auto; gap: 7px; padding: 9px 7px; } .checkCopy span { font-size: 8px; } }
+.eyebrow { color: #bb603e; }
+.header h2 { color: #17251f; }
+.summary, .scoreNote, .checkCopy span { color: #65716a; }
+.score { background: radial-gradient(circle at center, #fffefa 61%, transparent 63%), conic-gradient(#bb603e var(--score), #e9e5dc 0); color: #8c432a; }
+.progress { background: #e9e5dc; }
+.progress > span { background: #bb603e; }
+.checks li { border-color: #e5e0d6; background: #fffefa; }
+.checks li:hover { border-color: #d7a58e; box-shadow: 0 7px 18px #17251f10; }
+.checkIcon { border-color: #e5e0d6; color: #65716a; }
+.checkCopy strong { color: #35463d; }
+.checks button { border-color: #e5e0d6; color: #8c432a; }
+.checks button:hover { border-color: #d7a58e; background: #fbf1e9; }
+.privacy { color: #526158; background: #f2f0e9; }

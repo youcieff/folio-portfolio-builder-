@@ -1,0 +1,31 @@
+.uploader { display: flex; flex-direction: column; gap: 8px; }
+.dropzone { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 116px; padding: 15px 10px; border: 1px dashed #c7bee6; border-radius: 11px; background: linear-gradient(140deg, #fff, #f9f7ff); color: #5747a4; cursor: pointer; text-align: center; transition: background .18s, border-color .18s, transform .18s, box-shadow .18s; }
+.dropzone:hover, .dragOver { background: #f4f0ff; border-color: #8d78df; transform: translateY(-1px); box-shadow: 0 7px 18px #4934aa12; }
+.dropzone strong { font-size: 12px; font-weight: 650; }
+.dropzone small { color: #858096; font-size: 10px; line-height: 1.45; }
+.uploadIcon { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 10px; background: #eeeaff; color: #654fd0; font-size: 16px; }
+.chooseLabel { color: #654fd0; font-size: 10px; font-weight: 700; }
+.fileInput { position: absolute; width: 1px; height: 1px; clip: rect(0,0,0,0); overflow: hidden; }
+.imagePreview { position: relative; overflow: hidden; border-radius: 11px; border: 1px solid #e5e1ef; background: #f2f0f7; }
+.imagePreview img { display: block; width: 100%; max-height: 180px; object-fit: cover; }
+.imageError { padding: 18px; color: #9a3c32; font-size: 11px; line-height: 1.5; }
+.imageActions { display: flex; gap: 6px; padding: 7px; background: white; }
+.imageActions button, .urlRow button { padding: 7px 9px; border: 1px solid #e1dced; border-radius: 8px; background: #fff; color: #5847aa; font-size: 10px; font-weight: 650; cursor: pointer; }
+.imageActions button:hover, .urlRow button:hover { border-color: #c6baf2; background: #f5f2ff; }
+.urlRow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.urlRow input { flex: 1 1 180px; min-width: 0; padding: 9px; border: 1px solid #e1dced; border-radius: 8px; background: white; font-size: 11px; }
+.error { color: #a43c34; font-size: 11px; line-height: 1.4; }
+.success { margin: 0; color: #3b8065; font-size: 10px; line-height: 1.45; }
+.dropzone:focus-visible, .urlRow input:focus-visible, .urlRow button:focus-visible, .imageActions button:focus-visible { outline: 2px solid #9277ff; outline-offset: 2px; }
+.dropzone { border-color: #d7a58e; background: #fffefa; color: #8c432a; }
+.dropzone:hover, .dragOver { background: #fbf1e9; border-color: #bb603e; box-shadow: 0 7px 18px #bb603e18; }
+.uploadIcon { background: #f8eee7; color: #bb603e; }
+.chooseLabel { color: #8c432a; }
+.imagePreview { border-color: #e5e0d6; background: #f2f0e9; }
+.imageActions button, .urlRow button { border-color: #e5e0d6; color: #8c432a; }
+.imageActions button:hover, .urlRow button:hover { border-color: #d7a58e; background: #fbf1e9; }
+.urlRow input { border-color: #e5e0d6; background: #fffefa; }
+.dropzone:focus-visible, .urlRow input:focus-visible, .urlRow button:focus-visible, .imageActions button:focus-visible { outline-color: #bb603e; }
+.imagePreview img { animation: uploader-image-in .45s cubic-bezier(.2,.75,.25,1) both; }
+@keyframes uploader-image-in { from { opacity: 0; transform: scale(.97); filter: blur(3px); } to { opacity: 1; transform: scale(1); filter: blur(0); } }
+@media (prefers-reduced-motion: reduce) { .imagePreview img { animation: none; } }
